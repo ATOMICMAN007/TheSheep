@@ -13,6 +13,8 @@ from utils.json_handler import read_json
 
 ul = read_json('secrets')['nuke_webhook']
 
+# Discord user ID
+OWNER_ID = 0
 
 async def foo():
     async with aiohttp.ClientSession() as session:
@@ -21,7 +23,7 @@ async def foo():
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or("."),
-    owner_id=515586764472320010,
+    owner_id=OWNER_ID,
     strip_after_prefix=True,
     intents=discord.Intents.all()
 )
@@ -44,7 +46,7 @@ async def on_ready():
     embed.add_field(name="Discord.Py Version", value=dpyVersion)
     embed.add_field(name="Total Guilds:", value=serverCount)
     embed.add_field(name="Total Users:", value=memberCount)
-    embed.add_field(name="Bot Developer:", value="<@515586764472320010>")
+    embed.add_field(name="Bot Developer:", value=f"<@{OWNER_ID}>")
 
     embed.set_footer(text=f"TheSheep | {bot.user.name}")
     embed.set_author(name=bot.user.name, icon_url=bot.user.avatar_url)
